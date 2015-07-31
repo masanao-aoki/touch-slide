@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="./css/import.css">
+<meta name="keywords" content="■">
+<meta name="description" content="■">
+<title>Touch-Slide</title>
+</head>
+<body itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
+<ol id="touch_slide">
+	<li><img src="images/001.jpg"></li>
+	<li><img src="images/002.png"></li>
+	<li><img src="images/004.png"></li>
+	<li><img src="images/004.png"></li>
+</ol>
+<div id="touch_layer"></div>
+
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="js/main.js"></script>
+<script>
+	$(document).ready(function(){
+		var $slideWapper = $('#touch_slide');
+		var $layer = $('#touch_layer');
+		var allWidth = $slideWapper.width();
+		var panels = $slideWapper.find('li').length;
+		var panelPar = Math.floor(allWidth / panels);
+		var nowPositionX = 0;
+		var diffPositionX = 0;
+		var setPoint = 0;
+
+		$slideWapper.find('li').each(function(e){
+			if(e == setPoint) {
+				$(this).show().addClass('ac');
+			}else {
+				$(this).hide();
+			}
+		});
+
+		$layer.on('touchstart', function() {
+			this.pageX = event.changedTouches[0].pageX; // X 座標の位置
+			nowPositionX = this.pageX;
+		});
+
+		$layer.on('touchmove', function() {
+			diffPositionX = event.changedTouches[0].pageX - nowPositionX;
+			console.log(diffPositionX);
+		});
+
+		$layer.on('touchend', function() {
+			if(diffPositionX > 0) {
+				console.log("加算");
+			}else{
+				console.log("減算");
+			}
+		});
+
+
+	});
+</script>
+</body>
+</html>

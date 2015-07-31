@@ -1,0 +1,26 @@
+{
+  "name": "gulp-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masanao-aoki/gulp-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masanao-aoki/gulp-test/issues"
+  },
+  "homepage": "https://github.com/masanao-aoki/gulp-test",
+  "devDependencies": {
+    "gulp": "",
+    "gulp-watch": "",
+    "gulp-plumber": "",
+    "gulp-ruby-sass": "",
+    "gulp-pleeease": ""
+  }
+}
