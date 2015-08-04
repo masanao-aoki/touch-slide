@@ -34,14 +34,6 @@
 		var diffPositionX = 0;
 		var setPoint = 0;
 
-		$slideWapper.find('li').each(function(e){
-			panelSizesMinus[e+1] = panelPar * -(e+1);
-			panelSizesPlus[e+1] = panelPar * (e+1);
-		});
-
-		//console.log(panelSizesMinus);
-		//console.log(panelSizesPlus);
-
 
 		nnn(setPoint);
 
@@ -51,34 +43,6 @@
 			setPoint = i;
 		}
 
-
-		function diffCheck(name,typeArray,diffP){
-
-			var diffs = {
-				plus : function(typeArray,diffP){
-					for (i = 0; i < typeArray.length; i++) {
-						if(diffP > 0 && diffP < typeArray[i]){
-							console.log(typeArray[i]+":"+diffP);
-							nnn(i-1);
-							return;
-						}
-					};
-				},
-				minus : function(typeArray,diffP){
-					for (i = 0; i < typeArray.length; i++) {
-						if(diffP < 0 && diffP > typeArray[i]) {
-							console.log(typeArray[i]+":"+diffP);
-							nnn(i-1);
-							return;
-						}
-					};
-				}
-			}
-
-			diffs[name](typeArray,diffP);
-
-		}
-
 		$layer.on('touchstart', function() {
 			this.pageX = event.changedTouches[0].pageX; // X 座標の位置
 			nowPositionX = this.pageX;
@@ -86,16 +50,20 @@
 
 		$layer.on('touchmove', function() {
 			diffPositionX = event.changedTouches[0].pageX - nowPositionX;
-			if(diffPositionX > 0) {
-				diffCheck('plus',panelSizesPlus,diffPositionX);
-			} else if(diffPositionX < 0) {
-				diffCheck('minus',panelSizesMinus,diffPositionX);
+			if(diffPositionX > 0 && Math.floor(diffPositionX / panelPar) < panels) {
+				//console.log(Math.floor(diffPositionX / panelPar));
+				nnn(Math.floor(diffPositionX / panelPar));
+				//diffCheck('plus',panelSizesPlus,diffPositionX);
+			} else if(diffPositionX < 0  && Math.floor(diffPositionX / panelPar) >= -panels) {
+				//console.log(Math.floor(diffPositionX / panelPar)+panels);
+				nnn(Math.floor(diffPositionX / panelPar)+panels);
+				//diffCheck('minus',panelSizesMinus,diffPositionX);
 			}
 		});
 
 
 		$layer.on('touchend', function() {
-			/*console.log(setPoint);
+			console.log(setPoint);
 			var listItem = [];
 			var unSelectItem = [];
 
@@ -115,7 +83,7 @@
 			$slideWapper.find('li').each(function(e){
 				$(this).html(allItem[e]);
 				nnn(0);
-			});*/
+			});
 
 
 		});
