@@ -21,6 +21,8 @@
     "gulp-watch": "",
     "gulp-plumber": "",
     "gulp-ruby-sass": "",
-    "gulp-pleeease": ""
+    "gulp-pleeease": "",
+    "webpack-stream": "",
+    "jquery": ""
   }
 }

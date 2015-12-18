@@ -12,116 +12,17 @@
 <body itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
 <ol id="touch_slide">
-	<li><img src="images/001.jpg"></li>
+	<li><img src="images/001.png"></li>
 	<li><img src="images/002.png"></li>
 	<li><img src="images/003.png"></li>
 	<li><img src="images/004.png"></li>
+	<li><img src="images/005.png"></li>
+	<li><img src="images/006.png"></li>
+	<li><img src="images/007.png"></li>
+	<li><img src="images/008.png"></li>
 </ol>
 <div id="touch_layer"></div>
 
-<script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="js/main.js"></script>
-<script>
-	$(document).ready(function(){
-		var $slideWapper = $('#touch_slide');
-		var $layer = $('#touch_layer');
-		var allWidth = $slideWapper.width();
-		var panels = $slideWapper.find('li').length;
-		var panelPar = Math.floor(allWidth / panels);
-		var panelSizesPlus = [0];
-		var panelSizesMinus = [0];
-		var nowPositionX = 0;
-		var diffPositionX = 0;
-		var setPoint = 0;
-
-		$slideWapper.find('li').each(function(e){
-			panelSizesMinus[e+1] = panelPar * -(e+1);
-			panelSizesPlus[e+1] = panelPar * (e+1);
-		});
-
-		//console.log(panelSizesMinus);
-		//console.log(panelSizesPlus);
-
-
-		nnn(setPoint);
-
-		function nnn(i) {
-			$slideWapper.find('li').removeClass('ac').hide();
-			$slideWapper.find('li').eq(i).show().addClass('ac');
-			setPoint = i;
-		}
-
-
-		function diffCheck(name,typeArray,diffP){
-
-			var diffs = {
-				plus : function(typeArray,diffP){
-					for (i = 0; i < typeArray.length; i++) {
-						if(diffP > 0 && diffP < typeArray[i]){
-							console.log(typeArray[i]+":"+diffP);
-							nnn(i-1);
-							return;
-						}
-					};
-				},
-				minus : function(typeArray,diffP){
-					for (i = 0; i < typeArray.length; i++) {
-						if(diffP < 0 && diffP > typeArray[i]) {
-							console.log(typeArray[i]+":"+diffP);
-							nnn(i-1);
-							return;
-						}
-					};
-				}
-			}
-
-			diffs[name](typeArray,diffP);
-
-		}
-
-		$layer.on('touchstart', function() {
-			this.pageX = event.changedTouches[0].pageX; // X 座標の位置
-			nowPositionX = this.pageX;
-		});
-
-		$layer.on('touchmove', function() {
-			diffPositionX = event.changedTouches[0].pageX - nowPositionX;
-			if(diffPositionX > 0) {
-				diffCheck('plus',panelSizesPlus,diffPositionX);
-			} else if(diffPositionX < 0) {
-				diffCheck('minus',panelSizesMinus,diffPositionX);
-			}
-		});
-
-
-		$layer.on('touchend', function() {
-			/*console.log(setPoint);
-			var listItem = [];
-			var unSelectItem = [];
-
-			$slideWapper.find('li').each(function(e){
-				if(e >= setPoint) {
-					listItem[e-setPoint] = $(this).html();
-				}
-				else{
-					unSelectItem[e] = $(this).html();
-				}
-			});
-
-			var allItem = jQuery.merge( listItem, unSelectItem )
-
-			console.log(allItem);
-
-			$slideWapper.find('li').each(function(e){
-				$(this).html(allItem[e]);
-				nnn(0);
-			});*/
-
-
-		});
-
-
-	});
-</script>
 </body>
 </html>
