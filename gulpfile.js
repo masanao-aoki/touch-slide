@@ -31,7 +31,7 @@ gulp.task('webpack',function(){
 
 //sass
 gulp.task('sass', function () {
-    return sass(paths.scssSrc, {style: 'expanded',bundleExec: true})
+    return sass(paths.scssSrc2, {style: 'expanded',bundleExec: true})
     .on('error', function (err) {
       console.error('Error!', err.message);
    	})
